@@ -10,23 +10,23 @@
 </svelte:head>
 
 <section>
-	<ul class="posts">
-		{#each data.posts as post}
-			<li class="post">
-				<a href={post.slug} class="title">{post.title}</a>
-				<p class="date">{formatDate(post.date)}</p>
-				<p class="description">{post.description}</p>
+	<ul class="articles">
+		{#each data.articles as article}
+			<li class="article">
+				<a href={article.slug} class="title">{article.title}</a>
+				<p class="date">{formatDate(article.date)}</p>
+				<p class="description">{article.description}</p>
 			</li>
 		{/each}
 	</ul>
 </section>
 
 <style>
-	.posts {
+	.articles {
 		display: grid;
 		gap: 3rem;
 
-		.post {
+		.article {
 			max-inline-size: 60ch;
 
 			&:not(:last-child) {
