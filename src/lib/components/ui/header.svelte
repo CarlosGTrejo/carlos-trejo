@@ -19,7 +19,7 @@
         <a href="/articles">Articles</a>
         <a href="/notes">Notes</a>
         <a href="/finds">Finds</a>
-        <a href="/uses">Uses</a>
+        <!-- <a href="/uses">Uses</a> -->
     </nav>
     <CommandMenu />
     <Button onclick={toggleMode} variant="outline" size="icon" class='theme'>

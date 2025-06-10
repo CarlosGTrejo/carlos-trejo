@@ -9,7 +9,7 @@
 <ModeWatcher />
 <div class="mx-auto flex min-h-screen flex-col max-w-3xl px-6">
 	<Header/>
-	<main class="py-6 md:py-10">
+	<main class="md:py-10">
 		{@render children?.()}
 	</main>
 	<Footer/>
