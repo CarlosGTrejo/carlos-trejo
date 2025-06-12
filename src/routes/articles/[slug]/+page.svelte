@@ -14,7 +14,7 @@
 
 <article>
     <hgroup>
-        <h1>{data.meta.title}</h1>
+        <h1 class='text-balance'>{data.meta.title}</h1>
         <p>Published at {formatDate(data.meta.date)}</p>
     </hgroup>
 
@@ -31,7 +31,7 @@
 
 <style>
     article {
-        max-inline-size: 60ch;
+        max-inline-size: 70ch;
         margin-inline: auto;
     }
 </style>

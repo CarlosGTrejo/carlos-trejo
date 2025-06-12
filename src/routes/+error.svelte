@@ -3,7 +3,7 @@
 </script>
 
 <div class="error">
-	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">{page.status}: {page.error?.message}</h1>
+	<h1 class="text-4xl font-extrabold tracking-tight lg:text-5xl">{page.status}: {page.error?.message}</h1>
 </div>
 
 <style>

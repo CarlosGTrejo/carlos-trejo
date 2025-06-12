@@ -15,7 +15,7 @@
 		{#each data.articles as article, index}
 			<li>
 				<a href='/articles/{article.slug}' class='flex flex-col '>
-					<span class='capitalize font-bold underline underline-offset-2 text-xl md:text-3xl'>{article.title}</span>
+					<span class='capitalize font-bold underline underline-offset-2 text-xl md:text-3xl text-balance'>{article.title}</span>
 					<span class='text-muted-foreground text-sm'>{formatDate(article.date)}</span>
 				</a>
 				<p class="mt-2 line-clamp-3">{article.description}</p>
