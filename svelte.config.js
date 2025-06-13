@@ -6,17 +6,18 @@ import remarkTocCollapsible from './src/lib/modified-remarkToc.js';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings  from 'rehype-autolink-headings';
 
+
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
 			const highlighter = await createHighlighter({
-				themes: ['vitesse-black'],
-				langs: ['javascript', 'typescript']
+				themes: ['vitesse-black', 'vitesse-light'],
+				langs: ['javascript', 'typescript', 'python']
 			})
 			await highlighter.loadLanguage('javascript', 'typescript', 'python')
-			const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'vitesse-black' }))
+			const html = escapeSvelte(highlighter.codeToHtml(code, { lang, themes: { light: 'vitesse-light', dark: 'vitesse-black' } }))
 			return `{@html \`${html}\` }`
 		}
 	},
