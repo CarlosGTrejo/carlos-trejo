@@ -4,7 +4,7 @@ import type { Article } from '$lib/types'
 async function getArticles() {
 	let articles: Article[] = []
 
-	const paths = import.meta.glob('/src/articles/*.md', { eager: true })
+	const paths = import.meta.glob('/src/markdown/articles/*.md', { eager: true })
 
 	for (const path in paths) {
 		const file = paths[path]
