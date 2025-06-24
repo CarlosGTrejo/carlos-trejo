@@ -1,8 +1,8 @@
 import { json } from '@sveltejs/kit'
-import type { Article } from '$lib/types'
+import type { Post } from '$lib/types'
 
 async function getArticles() {
-	let articles: Article[] = []
+	let articles: Post[] = []
 
 	const paths = import.meta.glob('/src/markdown/articles/*.md', { eager: true })
 
@@ -11,8 +11,8 @@ async function getArticles() {
 		const slug = path.split('/').at(-1)?.replace('.md', '')
 
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
-			const metadata = file.metadata as Omit<Article, 'slug'>
-			const article = { ...metadata, slug } satisfies Article
+			const metadata = file.metadata as Omit<Post, 'slug'>
+			const article = { ...metadata, slug } satisfies Post
 			article.published && articles.push(article)
 		}
 	}

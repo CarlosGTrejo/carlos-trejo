@@ -1,69 +1,70 @@
 <script lang="ts">
-    import CalculatorIcon from "@lucide/svelte/icons/calculator";
-    import CalendarIcon from "@lucide/svelte/icons/calendar";
-    import CreditCardIcon from "@lucide/svelte/icons/credit-card";
-    import SettingsIcon from "@lucide/svelte/icons/settings";
-    import SmileIcon from "@lucide/svelte/icons/smile";
-    import UserIcon from "@lucide/svelte/icons/user";
+	import * as Command from '$lib/components/ui/command/index.js';
+	import { Newspaper, NotebookText, Sparkle } from '@lucide/svelte/icons';
+	import SearchWorker from '$lib/search-worker?worker';
+	import { onMount } from 'svelte';
 
-    import * as Command from "$lib/components/ui/command/index.js";
+	let open = $state(false);
+	let status = $state<'idle' | 'init' | 'ready'>('idle');
+	let query = $state('');
+	let results = $state([]);
+	let searchWorker: Worker;
 
-    let open = $state(false);
+	onMount(() => {
+		searchWorker = new SearchWorker();
+		searchWorker.onmessage = (event) => {
+			const { type, payload } = event.data;
+			console.log('Message from worker:', event.data);
+			type === 'ready' && (status = 'ready');
+			type === 'results' && (results = payload);
+		};
 
-    function handleKeydown(e: KeyboardEvent) {
-        if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-            e.preventDefault();
-            open = !open;
-        }
-    }
+		searchWorker.postMessage({ type: 'init' });
+	});
+
+	$effect(() => {
+		if (status === 'ready' && query.trim()) {
+			searchWorker.postMessage({ type: 'search', payload: query });
+		} else if (!query.trim()) {
+			results = [];
+		}
+	});
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+			e.preventDefault();
+			open = !open;
+		}
+		// Close on Escape
+		if (e.key === 'Escape' && open) {
+			e.preventDefault();
+			open = false;
+		}
+	}
 </script>
- 
+
 <svelte:document onkeydown={handleKeydown} />
- 
+
 <p class="text-muted-foreground text-sm max-lg:hidden">
- Press
- <kbd
-  class="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100"
- >
-  <span class="text-xs">⌘</span>K
- </kbd>
- to search
+	Press
+	<kbd
+		class="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100"
+	>
+		<span class="text-xs">⌘</span>K
+	</kbd>
+	to search
 </p>
+
 <Command.Dialog bind:open>
- <Command.Input placeholder="Search" />
- <Command.List>
-  <Command.Empty>No results found.</Command.Empty>
-  <Command.Group heading="Suggestions">
-   <Command.Item>
-    <CalendarIcon class="mr-2 size-4" />
-    <span>Calendar</span>
-   </Command.Item>
-   <Command.Item>
-    <SmileIcon class="mr-2 size-4" />
-    <span>Search Emoji</span>
-   </Command.Item>
-   <Command.Item>
-    <CalculatorIcon class="mr-2 size-4" />
-    <span>Calculator</span>
-   </Command.Item>
-  </Command.Group>
-  <Command.Separator />
-  <Command.Group heading="Settings">
-   <Command.Item>
-    <UserIcon class="mr-2 size-4" />
-    <span>Profile</span>
-    <Command.Shortcut>⌘P</Command.Shortcut>
-   </Command.Item>
-   <Command.Item>
-    <CreditCardIcon class="mr-2 size-4" />
-    <span>Billing</span>
-    <Command.Shortcut>⌘B</Command.Shortcut>
-   </Command.Item>
-   <Command.Item>
-    <SettingsIcon class="mr-2 size-4" />
-    <span>Settings</span>
-    <Command.Shortcut>⌘S</Command.Shortcut>
-   </Command.Item>
-  </Command.Group>
- </Command.List>
+	<Command.Input placeholder="Search" bind:value={query} />
+	<Command.List>
+		<Command.Loading>Searching...</Command.Loading>
+		{JSON.stringify(results)}
+	</Command.List>
 </Command.Dialog>
+
+<style>
+	p {
+		cursor: default;
+	}
+</style>
