@@ -81,7 +81,7 @@
 </p>
 
 {#snippet searchResult({ id, doc }: SearchResult)}
-	<Command.LinkItem href="/{doc.type}s/{id}" onSelect={() => (open = false)}>
+	<Command.LinkItem href="/{doc.type}/{id}" onSelect={() => (open = false)}>
 		{#if doc.type === 'notes'}
 			<NotepadText />
 		{:else if doc.type === 'finds'}
