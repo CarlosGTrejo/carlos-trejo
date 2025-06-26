@@ -1,11 +1,10 @@
 import { Document } from 'flexsearch';
 import type { SearchablePost } from './types';
 
-let index: Document<SearchablePost, true, false>;
+let index: Document<SearchablePost>;
 
 export function createIndex(data: SearchablePost[]): void {
-	console.log('Creating search index...');
-	index = new Document<SearchablePost, true, false>({
+	index = new Document<SearchablePost>({
 		document: {
 			id: 'slug',
 			index: [
@@ -34,18 +33,9 @@ export function createIndex(data: SearchablePost[]): void {
 		}
 	})
 
-	console.log('Index created, adding documents...');
 	for (const post of data) {
 		index.add(post);
 	}
-
-	console.log('Documents added, performing test search...');
-	let result = index.search('svelte', {
-		merge: true,
-		enrich: true
-	});
-
-	console.log('Test search result:', result);
 }
 
 export function searchIndex(query: string) {
