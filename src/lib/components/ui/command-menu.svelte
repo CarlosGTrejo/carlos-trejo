@@ -4,16 +4,13 @@
 	import type { GroupedResults, PostType, SearchResult } from '$lib/types';
 	import { Newspaper, NotepadText, Sparkle } from '@lucide/svelte/icons';
 	import { onMount } from 'svelte';
+	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
 
 	let open = $state(false);
-	let status = $state<'idle' | 'init' | 'ready'>('idle');
+	let workerStatus = $state<'idle' | 'init' | 'ready'>('idle');
+	let searching = $state<boolean>(false);
 	let query = $state('');
-	const emptyResults: GroupedResults = {
-		articles: [],
-		notes: [],
-		finds: []
-	};
-	let results = $state<GroupedResults>(emptyResults);
+	let results = $state<GroupedResults | null>(null);
 	let searchWorker: Worker;
 
 	// Debounce configuration
@@ -24,8 +21,8 @@
 		searchWorker = new SearchWorker();
 		searchWorker.onmessage = (event) => {
 			const { type, payload } = event.data;
-			type === 'ready' && (status = 'ready');
-			type === 'results' && (results = payload);
+			type === 'ready' && (workerStatus = 'ready');
+			type === 'results' && (results = payload) && (searching = false);
 		};
 
 		searchWorker.postMessage({ type: 'init' });
@@ -38,21 +35,21 @@
 	$effect(() => {
 		// Clear any existing timer
 		clearTimeout(debounceTimer);
-
-		if (status === 'ready' && query.trim()) {
+		if (!query.trim()) {
+			// Clear results immediately when query is empty
+			searching = false;
+			results = null;
+		} else if (workerStatus === 'ready') {
+			// We know query is not empty here, no need to check
+			searching = true;
 			// Set up debounced search
 			debounceTimer = setTimeout(() => {
 				searchWorker.postMessage({ type: 'search', payload: query });
 			}, DEBOUNCE_DELAY);
-		} else if (!query.trim()) {
-			// Clear results immediately when query is empty
-			results = emptyResults;
 		}
 
 		// Cleanup function to clear timer if effect re-runs
-		return () => {
-			clearTimeout(debounceTimer);
-		};
+		return () => clearTimeout(debounceTimer);
 	});
 
 	function handleKeydown(e: KeyboardEvent) {
@@ -94,19 +91,32 @@
 {/snippet}
 
 <Command.Dialog bind:open shouldFilter={false}>
-	<Command.Input placeholder="Search" bind:value={query} />
+	<Command.Input bind:value={query} />
 	<Command.List>
+		{#if searching}
+			<Skeleton class="ml-2 mt-2 h-3 w-9" />
+			<Command.Item disabled>
+				<Skeleton class="size-6 rounded-full" />
+				<Skeleton class="h-6 w-[30ch]" />
+			</Command.Item>
+		{:else if !query.trim()}
+			<Command.Item disabled>
+				<p class="py-3 text-center text-sm text-muted-foreground w-full">
+					Search for articles, notes, or finds
+				</p>
+			</Command.Item>
+		{:else if results}
+			{#each Object.keys(results) as PostType[] as type}
+				{#if results[type].length > 0}
+					<Command.Group heading={type} class="capitalize">
+						{#each results[type] as result (result.id)}
+							{@render searchResult(result)}
+						{/each}
+					</Command.Group>
+				{/if}
+			{/each}
+		{/if}
 		<Command.Empty>No results found.</Command.Empty>
-		<!-- iterate over the keys of results -->
-		{#each Object.keys(results) as PostType[] as type}
-			{#if results[type].length > 0}
-				<Command.Group heading={type} class="capitalize">
-					{#each results[type] as result (result.id)}
-						{@render searchResult(result)}
-					{/each}
-				</Command.Group>
-			{/if}
-		{/each}
 	</Command.List>
 </Command.Dialog>
 
