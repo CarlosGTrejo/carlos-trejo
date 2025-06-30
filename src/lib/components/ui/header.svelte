@@ -11,7 +11,7 @@
 
 	import { page } from '$app/state';
 
-	const currentPage = page.params.type || '';
+	const currentPage = $derived(page.params.type || '');
 	const routes: PostType[] = ['articles', 'notes', 'finds'];
 	const itemClasses = (route: PostType): string =>
 		currentPage === route ? 'text-foreground' : 'text-muted-foreground hover:text-foreground';
