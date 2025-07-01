@@ -122,7 +122,10 @@
 	</p>
 	<p>
 		I'm currently focused on enhancing my skills in these areas. This website serves as a portfolio
-		of my work and a place for me to share my learning journey.
+		of my work and a place for me to share my learning journey. The <a href="/articles">articles</a>
+		section contains more polished content, while the <a href="/notes">notes</a> section contains my
+		raw thoughts and study notes. Lastly, the <a href="/finds">finds</a> section contains interesting
+		things, like tools and technologies, that I want to keep track of and share.
 	</p>
 	<p>
 		A lot of what I've learned has come from personal projects, self-directed learning, and
