@@ -84,7 +84,7 @@
 				'SSH Hardening',
 				'Monitoring (Uptime Kuma)',
 				'Zero-Trust Access Control (TwinGate)',
-				'Documentation',
+				'nftables',
 				'Cloudflare Tunnel',
 				'Resource Management + Optimization'
 			]
