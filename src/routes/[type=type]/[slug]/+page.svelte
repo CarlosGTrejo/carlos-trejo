@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { badgeVariants } from '$lib/components/ui/badge/index.js';
+	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { formatDate } from '$lib/utils';
 	import type { PageProps } from './$types';
 
@@ -21,7 +22,9 @@
 
 	<div class="flex gap-2">
 		{#each data.meta.categories as category}
-			<a href="/categories/{category}" class={badgeVariants({ variant: 'default' })}>{category}</a>
+			<!-- Will use this when the categories route is ready -->
+			<!-- <a href="/categories/{category}" class={badgeVariants({ variant: 'default' })}>{category}</a> -->
+			<Badge>{category}</Badge>
 		{/each}
 	</div>
 
