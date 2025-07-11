@@ -19,9 +19,9 @@
 		<p>Published at {formatDate(data.meta.date)}</p>
 	</hgroup>
 
-	<div class="flex gap-4">
+	<div class="flex gap-2">
 		{#each data.meta.categories as category}
-			<a href="/categories/{category}" class={badgeVariants({ variant: 'outline' })}>{category}</a>
+			<a href="/categories/{category}" class={badgeVariants({ variant: 'default' })}>{category}</a>
 		{/each}
 	</div>
 
