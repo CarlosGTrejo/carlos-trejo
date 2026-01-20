@@ -8,7 +8,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 const highlighter = await createHighlighter({
     themes: ['vitesse-black', 'vitesse-light'],
-    langs: ['javascript', 'typescript', 'python', 'json', 'svelte', 'sql', 'dockerfile', 'docker', 'terraform', 'ansi']
+    langs: ['javascript', 'typescript', 'python', 'json', 'svelte', 'sql', 'dockerfile', 'docker', 'terraform', 'ansi', 'yaml']
 });
 
 /** @type {import('mdsvex').MdsvexOptions} */
