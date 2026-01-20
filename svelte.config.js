@@ -8,25 +8,20 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 const highlighter = await createHighlighter({
     themes: ['vitesse-black', 'vitesse-light'],
-    langs: ['javascript', 'typescript', 'python', 'json', 'svelte']
+    langs: ['javascript', 'typescript', 'python', 'json', 'svelte', 'sql', 'dockerfile', 'docker', 'terraform', 'ansi']
 });
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
     extensions: ['.md'],
     highlight: {
-        highlighter: async (code, lang = 'text') => {
-            await highlighter.loadLanguage(
-                'javascript',
-                'typescript',
-                'python',
-                'json',
-                'svelte',
-                'ansi'
-            );
+        highlighter: (code, lang = 'text') => {
+            const safeLang = highlighter.getLoadedLanguages().includes(lang)
+                ? lang
+                : 'text';
             const html = escapeSvelte(
                 highlighter.codeToHtml(code, {
-                    lang,
+                    lang: safeLang,
                     themes: { light: 'vitesse-light', dark: 'vitesse-black' }
                 })
             );
