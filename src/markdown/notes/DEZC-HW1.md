@@ -1,6 +1,6 @@
 ---
 title: Data Engineering Zoomcamp - Homework 1
-description: Answers and (overengineered) solutions for Data Engineering Zoomcamp Homework 1.
+description: Answers and solutions for Data Engineering Zoomcamp Homework 1.
 date: '2026-01-18'
 categories:
     - Data Engineering
