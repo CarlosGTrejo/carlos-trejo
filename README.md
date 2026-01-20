@@ -1,4 +1,4 @@
-# Carlos Trejo — Portfolio
+# Carlos Trejo Portfolio Website
 
 Personal site built with SvelteKit to showcase articles, notes, and curated finds. Content is markdown-driven, rendered with mdsvex + Shiki, and deployed to Cloudflare Workers. A client-side web worker powers fast, type-filtered search over all content.
 
