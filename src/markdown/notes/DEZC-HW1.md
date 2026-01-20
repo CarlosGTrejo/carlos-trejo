@@ -16,6 +16,9 @@ _Run docker with the `python:3.13` image. Use an entrypoint `bash` to interact w
   
 _What's the version of `pip` in the image?_
 
+> This question requires us to use `docker run` and change the entry point to check the version of pip (although we could do it without changing the entry point).
+> I like using `--rm` to make sure we leave no dangling contaiers, and `-it` so that we can interact with the container through our terminal.
+
 ```ansi
 docker run --rm -it --entrypoint /bin/bash python:3.13-slim
 
@@ -62,8 +65,9 @@ volumes:
     name: vol-pgadmin_data
 ```
 
+> Docker containers will communicate using the service name as the hostname and the internal port exposed by the service. In this case:
+
 **Answer:**
-Docker containers will communicate using the service name as the hostname and the internal port exposed by the service. In this case:
 - postgres:5432
 - db:5432
 
@@ -77,7 +81,8 @@ wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/misc/taxi_z
 ```
 _For the trips in November 2025 (lpep_pickup_datetime between '2025-11-01' and '2025-12-01', exclusive of the upper bound), how many trips had a `trip_distance` of less than or equal to 1 mile?_
 
-Using duckdb, we can load the parquet file and run the query:
+> We could create a docker-compose.yaml file to deploy a database (along with some data ingestion script), pgAdmin, but it is faster to use duckdb on this question to practice our SQL.
+> So using duckdb, we can load the parquet file and run the following query. We use `COUNT(*)` to count all rows that satisfy the `WHERE` clause. In this case, we make sure our trip distance is less than or equal to 1 mile and that the trip happened in November. Notice that we use single quotes instead of double quotes. Double quotes are used for column names, and it would've caused an error if we had tried it in this query:
 ```sql
 CREATE TABLE trip AS SELECT * FROM read_parquet("green_tripdata_2025-11.parquet");
 
@@ -94,13 +99,16 @@ WHERE trip_distance <= 1
 
 _Which was the pick up day with the longest trip distance? Only consider trips with `trip_distance` less than 100 miles (to exclude data errors). Use the pick up time for your calculations._
 
+> This question required a bit more planning. I used the `CAST` function here since we're only interested in the day and not the time, however, it doesn't matter if we cast it or not since the output will still show us the row with the max distance.
+> Next I used the `MAX` function since we are being asked to find the longest trip distance, and we attach a `WHERE` clause to reduce it to trips with less than 100 miles. Finally, we make sure to add a `GROUP BY` clause to group by day because we want the longest trip distance per day.
+
 ```sql
 SELECT
-  CAST(lpep_pickup_datetime AS DATE) AS day,
+  CAST(lpep_pickup_datetime AS DATE) AS "day",
   MAX(trip_distance) AS max_dist
 FROM trip
 WHERE trip_distance < 100
-GROUP BY day
+GROUP BY "day"
 ORDER BY max_dist DESC
 LIMIT 1;
 ```
@@ -112,6 +120,8 @@ LIMIT 1;
 ## Question 5
 
 _Which was the pickup zone with the largest `total_amount` (sum of all trips) on November 18th, 2025?_
+
+> For this question, we need to join the trip data with the zones data to get the zone names. We do this by matching the `PULocationID` from the trip data with the `LocationID` from the zones data. Notice that I used double quotes around "Zone" since it is a reserved keyword in SQL. I used `CAST` again to extract the date from the timestamp, and then we group by `PULocationID` and "Zone" to get the total amount per zone. Finally, we order the results in descending order and limit it to 1 to get the zone with the largest total amount.
 
 ```sql
 CREATE TABLE zone_lookup AS SELECT * FROM read_csv_auto('taxi_zone_lookup.csv');
@@ -138,6 +148,7 @@ LIMIT 1;
 
 _For the passengers picked up in the zone named "East Harlem North" in November 2025, which was the drop off zone that had the largest tip?_
 
+> Similar to the previous question, we need to join the trip data with the zones data twice: once for the pickup location and once for the dropoff location. We filter the results to only include trips picked up in "East Harlem North" and in November 2025. Finally, we order the results by `tip_amount` in descending order and limit it to 1 to get the dropoff zone with the largest tip.
 
 ```sql
 SELECT zdo."Zone" dropoff, tip_amount
@@ -166,4 +177,5 @@ _Which of the following sequences, respectively, describes the workflow for:_
 2. _Generating proposed changes and auto-executing the plan_
 3. _Remove all resources managed by terraform_
 
+> A quick look at the docs and we can see that the correct sequence is:
 **Answer:** terraform init, terraform apply -auto-approve, terraform destroy
