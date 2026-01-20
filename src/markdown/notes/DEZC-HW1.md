@@ -83,6 +83,7 @@ _For the trips in November 2025 (lpep_pickup_datetime between '2025-11-01' and '
 
 > We could create a docker-compose.yaml file to deploy a database (along with some data ingestion script), pgAdmin, but it is faster to use duckdb on this question to practice our SQL.
 > So using duckdb, we can load the parquet file and run the following query. We use `COUNT(*)` to count all rows that satisfy the `WHERE` clause. In this case, we make sure our trip distance is less than or equal to 1 mile and that the trip happened in November. Notice that we use single quotes instead of double quotes. Double quotes are used for column names, and it would've caused an error if we had tried it in this query:
+
 ```sql
 CREATE TABLE trip AS SELECT * FROM read_parquet("green_tripdata_2025-11.parquet");
 
