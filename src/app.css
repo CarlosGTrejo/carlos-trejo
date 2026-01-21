@@ -4,73 +4,87 @@
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
-    --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.129 0.042 264.695);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.129 0.042 264.695);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.129 0.042 264.695);
-    --primary: oklch(0.208 0.042 265.755);
-    --primary-foreground: oklch(0.984 0.003 247.858);
-    --secondary: oklch(0.968 0.007 247.896);
-    --secondary-foreground: oklch(0.208 0.042 265.755);
-    --muted: oklch(0.968 0.007 247.896);
-    --muted-foreground: oklch(0.554 0.046 257.417);
-    --accent: oklch(0.968 0.007 247.896);
-    --accent-foreground: oklch(0.208 0.042 265.755);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.929 0.013 255.508);
-    --input: oklch(0.929 0.013 255.508);
-    --ring: oklch(0.704 0.04 256.788);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: oklch(0.984 0.003 247.858);
-    --sidebar-foreground: oklch(0.129 0.042 264.695);
-    --sidebar-primary: oklch(0.208 0.042 265.755);
-    --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-    --sidebar-accent: oklch(0.968 0.007 247.896);
-    --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-    --sidebar-border: oklch(0.929 0.013 255.508);
-    --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+@layer base {
 
-.dark {
-    --background: oklch(0.129 0.042 264.695);
-    --foreground: oklch(0.984 0.003 247.858);
-    --card: oklch(0.208 0.042 265.755);
-    --card-foreground: oklch(0.984 0.003 247.858);
-    --popover: oklch(0.208 0.042 265.755);
-    --popover-foreground: oklch(0.984 0.003 247.858);
-    --primary: oklch(0.929 0.013 255.508);
-    --primary-foreground: oklch(0.208 0.042 265.755);
-    --secondary: oklch(0.279 0.041 260.031);
-    --secondary-foreground: oklch(0.984 0.003 247.858);
-    --muted: oklch(0.279 0.041 260.031);
-    --muted-foreground: oklch(0.704 0.04 256.788);
-    --accent: oklch(0.279 0.041 260.031);
-    --accent-foreground: oklch(0.984 0.003 247.858);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.551 0.027 264.364);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.208 0.042 265.755);
-    --sidebar-foreground: oklch(0.984 0.003 247.858);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-    --sidebar-accent: oklch(0.279 0.041 260.031);
-    --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.551 0.027 264.364);
+    /* Source-of-truth tokens for light/dark runtime themes */
+    :root {
+        color-scheme: light;
+        --radius: 0.625rem;
+        --background: oklch(1 0 0);
+        --foreground: oklch(0.129 0.042 264.695);
+        --card: oklch(1 0 0);
+        --card-foreground: oklch(0.129 0.042 264.695);
+        --popover: oklch(1 0 0);
+        --popover-foreground: oklch(0.129 0.042 264.695);
+        --primary: oklch(0.208 0.042 265.755);
+        --primary-foreground: oklch(0.984 0.003 247.858);
+        --secondary: oklch(0.968 0.007 247.896);
+        --secondary-foreground: oklch(0.208 0.042 265.755);
+        --muted: oklch(0.968 0.007 247.896);
+        --muted-foreground: oklch(0.554 0.046 257.417);
+        --accent: oklch(0.968 0.007 247.896);
+        --accent-foreground: oklch(0.208 0.042 265.755);
+        --destructive: oklch(0.577 0.245 27.325);
+        --border: oklch(0.929 0.013 255.508);
+        --input: oklch(0.929 0.013 255.508);
+        --ring: oklch(0.704 0.04 256.788);
+        --chart-1: oklch(0.646 0.222 41.116);
+        --chart-2: oklch(0.6 0.118 184.704);
+        --chart-3: oklch(0.398 0.07 227.392);
+        --chart-4: oklch(0.828 0.189 84.429);
+        --chart-5: oklch(0.769 0.188 70.08);
+        --sidebar: oklch(0.984 0.003 247.858);
+        --sidebar-foreground: oklch(0.129 0.042 264.695);
+        --sidebar-primary: oklch(0.208 0.042 265.755);
+        --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+        --sidebar-accent: oklch(0.968 0.007 247.896);
+        --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+        --sidebar-border: oklch(0.929 0.013 255.508);
+        --sidebar-ring: oklch(0.704 0.04 256.788);
+    }
+
+    .dark {
+        color-scheme: dark;
+        --background: oklch(0.129 0.042 264.695);
+        --foreground: oklch(0.984 0.003 247.858);
+        --card: oklch(0.208 0.042 265.755);
+        --card-foreground: oklch(0.984 0.003 247.858);
+        --popover: oklch(0.208 0.042 265.755);
+        --popover-foreground: oklch(0.984 0.003 247.858);
+        --primary: oklch(0.929 0.013 255.508);
+        --primary-foreground: oklch(0.208 0.042 265.755);
+        --secondary: oklch(0.279 0.041 260.031);
+        --secondary-foreground: oklch(0.984 0.003 247.858);
+        --muted: oklch(0.279 0.041 260.031);
+        --muted-foreground: oklch(0.704 0.04 256.788);
+        --accent: oklch(0.279 0.041 260.031);
+        --accent-foreground: oklch(0.984 0.003 247.858);
+        --destructive: oklch(0.704 0.191 22.216);
+        --border: oklch(1 0 0 / 10%);
+        --input: oklch(1 0 0 / 15%);
+        --ring: oklch(0.551 0.027 264.364);
+        --chart-1: oklch(0.488 0.243 264.376);
+        --chart-2: oklch(0.696 0.17 162.48);
+        --chart-3: oklch(0.769 0.188 70.08);
+        --chart-4: oklch(0.627 0.265 303.9);
+        --chart-5: oklch(0.645 0.246 16.439);
+        --sidebar: oklch(0.208 0.042 265.755);
+        --sidebar-foreground: oklch(0.984 0.003 247.858);
+        --sidebar-primary: oklch(0.488 0.243 264.376);
+        --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+        --sidebar-accent: oklch(0.279 0.041 260.031);
+        --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+        --sidebar-border: oklch(1 0 0 / 10%);
+        --sidebar-ring: oklch(0.551 0.027 264.364);
+    }
+
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
 }
 
 @theme inline {
@@ -111,214 +125,214 @@
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@layer base {
-    * {
-        @apply border-border outline-ring/50;
+@layer components {
+    hgroup h1 {
+        @apply font-extrabold;
+        font-size: clamp(2rem, 7vw, 3rem);
     }
 
-    body {
-        @apply bg-background text-foreground;
-    }
-}
+    .prose {
+        @apply md:text-lg;
+        text-align: justify;
+        hyphens: auto;
+        line-height: 1.75;
 
-hgroup h1 {
-    @apply font-extrabold;
-    font-size: clamp(2rem, 7vw, 3rem);
-}
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            @apply text-left text-balance;
+        }
 
-.prose {
-    @apply md:text-lg;
-    text-align: justify;
-    hyphens: auto;
-    line-height: 1.75;
+        h2 {
+            font-size: clamp(1rem, 7vw, 2rem);
+            font-weight: bold;
+            margin-top: 3rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
 
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        @apply text-balance;
-    }
+        h3 {
+            font-size: clamp(1.25rem, 5vw, 1.5rem);
+            font-weight: bold;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
 
-    h2 {
-        font-size: clamp(1rem, 7vw, 2rem);
-        font-weight: bold;
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-        line-height: 1.3;
-    }
+        h4,
+        h5,
+        h6 {
+            @apply font-semibold mt-4 mb-2;
+            font-size: 1.125rem;
+            line-height: 1.4;
+        }
 
-    h3 {
-        font-size: clamp(1.25rem, 5vw, 1.5rem);
-        font-weight: bold;
-        margin-top: 1.25rem;
-        margin-bottom: 0.5rem;
-        line-height: 1.4;
-    }
+        h2,
+        h3 {
+            a {
+                color: inherit;
+                text-decoration: none;
 
-    h4,
-    h5,
-    h6 {
-        @apply font-semibold mt-4 mb-2;
-        font-size: 1.125rem;
-        line-height: 1.4;
-    }
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
 
-    h2,
-    h3 {
-        a {
-            color: inherit;
-            text-decoration: none;
+            a::before {
+                content: '# ';
+                margin-left: -1.5ch;
+                opacity: 0;
+                list-style-position: outside;
+            }
 
-            &:hover {
-                text-decoration: underline;
+            a:hover::before {
+                opacity: 1;
             }
         }
 
-        a::before {
-            content: '# ';
-            margin-left: -1.5ch;
-            opacity: 0;
-            list-style-position: outside;
+        details {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-top: 1.5rem;
+
+            summary {
+                @apply text-lg;
+                cursor: pointer;
+                font-weight: bold;
+                position: relative;
+            }
         }
 
-        a:hover::before {
-            opacity: 1;
-        }
-    }
-
-    details {
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 1rem;
-        margin-top: 1.5rem;
-
-        summary {
-            @apply text-lg;
-            cursor: pointer;
-            font-weight: bold;
-            position: relative;
-        }
-    }
-
-    /* p {
+        /* p {
     text-align: justify;
     hyphens: auto;
     line-height: 1.75;
   } */
 
-    p:not(:is(h2, h3, h4, h5, h6) + p) {
-        margin-top: 2rem;
-    }
-
-    ol {
-        list-style: decimal;
-    }
-
-    ul {
-        list-style: disc;
-    }
-
-    li::marker {
-        font-weight: bold;
-    }
-
-    p + ul,
-    p + ol {
-        margin-top: 0.5rem;
-    }
-
-    ol,
-    ul {
-        margin-left: 1em;
-
-        ul,
-        ol {
-            margin-left: 1rem;
+        p:not(:is(h2, h3, h4, h5, h6) + p) {
+            margin-top: 2rem;
         }
 
         ol {
-            list-style-type: lower-alpha;
+            list-style: decimal;
         }
 
         ul {
-            list-style-type: circle;
+            list-style: disc;
+        }
+
+        li::marker {
+            font-weight: bold;
+        }
+
+        p+ul,
+        p+ol {
+            margin-top: 0.5rem;
+        }
+
+        ol,
+        ul {
+            margin-left: 1em;
+
+            ul,
+            ol {
+                margin-left: 1rem;
+            }
+
+            ol {
+                list-style-type: lower-alpha;
+            }
+
+            ul {
+                list-style-type: circle;
+            }
+        }
+
+        .contains-task-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: dotted underline;
+            text-decoration-color: var(--secondary-foreground);
+            text-decoration-thickness: 8%;
+        }
+
+        a:hover {
+            text-decoration-style: solid;
+        }
+
+        pre {
+            max-inline-size: 100%;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            tab-size: 4;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+
+        code:not(pre code) {
+            font-family: monospace;
+            padding: 0.1rem;
+            border-radius: 3px;
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+            border: 1px solid var(--border);
+        }
+
+        blockquote {
+            background-color: var(--muted);
+            border-left: 8px solid var(--muted-foreground);
+            padding: 1.5rem 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+
+        blockquote>*:first-child {
+            margin-top: 0;
+        }
+
+        blockquote>*:last-child {
+            margin-bottom: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            color: var(--secondary-foreground);
+            background-color: var(--secondary);
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(2n) {
+            background-color: var(--accent);
         }
     }
 
-    .contains-task-list {
-        list-style-type: none;
-        padding-left: 0;
+    html.dark .shiki,
+    html.dark .shiki span {
+        color: var(--shiki-dark) !important;
+        background-color: var(--shiki-dark-bg) !important;
+        /* Optional, if you also want font styles */
+        font-style: var(--shiki-dark-font-style) !important;
+        font-weight: var(--shiki-dark-font-weight) !important;
+        text-decoration: var(--shiki-dark-text-decoration) !important;
     }
-
-    a {
-        color: var(--primary);
-        text-decoration: dotted underline;
-        text-decoration-color: var(--secondary-foreground);
-        text-decoration-thickness: 8%;
-    }
-
-    a:hover {
-        text-decoration-style: solid;
-    }
-
-    pre {
-        max-inline-size: 100%;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border: 1px solid var(--border);
-        tab-size: 4;
-        margin-top: 1rem;
-        overflow-x: auto;
-    }
-
-    code:not(pre code) {
-        font-family: monospace;
-        padding: 0.1rem;
-        border-radius: 3px;
-        background-color: var(--secondary);
-        color: var(--secondary-foreground);
-        border: 1px solid var(--border);
-    }
-
-    blockquote {
-        background-color: var(--muted);
-        border-left: 8px solid var(--muted-foreground);
-        padding: 0rem 1rem;
-        margin: 1.5rem 0;
-        font-style: italic;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 1rem 0;
-    }
-
-    th,
-    td {
-        border: 1px solid var(--border);
-        padding: 0.5rem;
-        text-align: left;
-    }
-
-    th {
-        color: var(--secondary-foreground);
-        background-color: var(--secondary);
-        font-weight: bold;
-    }
-
-    tbody tr:nth-child(2n) {
-        background-color: var(--accent);
-    }
-}
-
-html.dark .shiki,
-html.dark .shiki span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-    /* Optional, if you also want font styles */
-    font-style: var(--shiki-dark-font-style) !important;
-    font-weight: var(--shiki-dark-font-weight) !important;
-    text-decoration: var(--shiki-dark-text-decoration) !important;
 }
